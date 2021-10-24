@@ -1,0 +1,378 @@
+
+//マップ型変数breakpointsを定義
+$breakpoints: (
+//キー　　値
+  'sp': 'screen and (max-width: 767px)', //767px以下（スマホ）用の表示
+  'pc': 'screen and (min-width: 768px)' //768px以上（タブレット・PC）用の表示
+) !default;
+
+//メディアクエリ用のmixinを定義。デフォ値はmd
+@mixin mq($breakpoint: sp) {
+//map-get(マップ型変数, キー)で値を取得
+  @media #{map-get($breakpoints, $breakpoint)} {
+    //この中をカスタムできる
+    @content;
+  }
+}
+
+/* =================================================
+共通のCSS
+================================================= */
+
+$text-color-base: #082B48;
+$bg-main-color: #FBFBFB;
+$drawer-color: #fafafa;
+$course-color: #e3fcf4;
+$white-text-color: #fff;
+$btn-register-color: #ec6d64;
+$top-btn-color: #999;
+$top-btn-active: #666;
+$modal-color: rgba(0, 0, 0, 0.8);
+$e-mail-form-color: #d8d8d8;
+
+body {
+  color: $text-color-base;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.5;
+  background-color: $bg-main-color;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: $text-color-base;
+  
+  &:hover {
+    opacity: .7;
+  }
+}
+
+.container {
+  width: 90%;
+  max-width: 980px;
+  margin: auto;
+}
+
+/* ===============================================
+header
+=============================================== */
+header {
+  padding: 20px 0;
+
+  .header-left {
+    float: left;
+    @include mq(sp) {
+      float: none;
+    }
+  }
+
+  .header-right {
+    float: right;
+    @include mq(sp) {
+      float: none;
+    }
+  }
+
+  .header-title {
+    font-weight: bold;
+    font-size: 24px;
+
+    @include mq(sp) {
+      text-align: center;
+    }
+  }
+
+}
+
+.top {
+  height: 400px;
+}
+
+.clear::after {
+  content: "";
+  clear: both;
+  display: block;
+
+  @include mq(sp) {
+    content: none;
+  }
+}
+
+.header-nav {
+  @include mq(sp) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.header-nav-item {
+  float: left;
+  margin-left: 50px;
+
+  a {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 36px;
+  }
+
+  @include mq(sp) {
+    float: none;
+    margin: 0;
+  }
+}
+
+/* ===============================================
+drawer menu
+=============================================== */
+
+#drawer-course {
+  position: relative;
+}
+
+#drawer-list {
+  font-size: 15px;
+  text-align: center;
+  display: none;
+  position: absolute;
+  border: 1px solid;
+  width: 75px;
+  background-color: $drawer-color;
+}
+
+/* ===============================================
+top
+=============================================== */
+.top {
+  background-image: url(../img/main-vsual-nontitle.png);
+  background-size: cover;
+  padding: 80px 0;
+  @include mq(sp) {
+    padding: 120px 0;
+  }
+
+  .top-title {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    @include mq(sp) {
+      font-size: 32px;
+    }
+  }
+
+  .top-subtitle {
+    font-size: 18px;
+    text-align: center;
+    @include mq(sp) {
+      font-size: 14px;
+    }
+  }
+
+}
+
+/* ===============================================
+section共通クラス
+=============================================== */
+.section {
+  padding: 60px 0;
+  @include mq(sp) {
+    padding: 80px 0;
+
+    p {
+      @include mq(sp) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .section-title {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    @include mq(sp) {
+      font-size: 24px;
+    }
+  }
+}
+
+/* ===============================================
+about
+=============================================== */
+.about-left {
+  float: left;
+  width: 48%;
+  @include mq(sp) {
+    float: none;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.about-right {
+  float: right;
+  width: 48%;
+  @include mq(sp) {
+    float: none;
+    width: 100%;
+  }
+}
+
+/* ===============================================
+course
+=============================================== */
+.course {
+  background-color: $course-color;
+
+  .course-wrapper {
+    display: flex;
+    justify-content: space-between;
+    @include mq(sp) {
+      flex-wrap: wrap;
+    }
+  }
+
+  .course-item {
+    width: 30%;
+    @include mq(sp) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  ul {
+    li {
+      a {
+        img {
+          width: 200px;
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+modal
+=============================================== */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: $modal-color;
+  display: none;
+}
+
+.bigimg {
+  position: absolute;
+  width: 80%;
+  max-width: 800px;
+  top: 80px;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* ===============================================
+contact
+=============================================== */
+
+.contact-message {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="e-mail"] {
+  width: 600px;
+  border: 3px solid $e-mail-form-color;
+  font-size: 18px;
+  display: block;
+  margin: auto;
+  padding: 15px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+  @include mq(sp) {
+    width: 100%;
+  }
+}
+
+.btn {
+  padding: 20px 60px;
+  display: inline-block;
+  background-color: $text-color-base;
+  color: $white-text-color;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 4px;
+  border: none;
+
+  &:hover {
+    opacity: .7;
+    cursor: pointer;
+  }
+
+}
+
+.btn-register {
+  background-color: $btn-register-color;
+  display: block;
+  margin:  auto;
+}
+
+/* ===============================================
+footer
+=============================================== */
+
+footer {
+  background-color: $text-color-base;
+  color: $white-text-color;
+  padding: 20px 0;
+}
+
+.copyright {
+  font-size: 12px;
+  float: right;
+  @include mq(sp) {
+    font-size: 10px;
+    float: none;
+    text-align: center;
+  }
+}
+
+  /* ===============================================
+  topへ戻る
+=============================================== */
+
+#page_top {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+
+  a {
+    background-color: $top-btn-color;
+    color: $white-text-color;
+    text-align: center;
+    padding: 20px 20px;
+
+    &:hover {
+      background-color: $top-btn-active;
+    }
+  }
+  }
+
+
+
+
+
+
+
+
+
+
